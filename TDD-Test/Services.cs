@@ -9,14 +9,12 @@ namespace TDD_Test
 {
     public class Services
     {
-        public Gtin AssembleGtin(string input)
+        public Gtin AssembleGtin(string[] input)
         {
-            string[] splittedInpuString = input.Split(";");
-
             return new Gtin()
             {
-                Name = splittedInpuString[0],
-                Price = int.Parse(splittedInpuString[3])
+                Name = input[0],
+                Price = int.Parse(input[3])
             };
         }
 
@@ -28,7 +26,7 @@ namespace TDD_Test
                 .Select(group =>
                 {
                     var gtins = group
-                        .Select(values => AssembleGtin(string.Join(";", values))).ToList();
+                        .Select(values => AssembleGtin(values)).ToList();
 
                     return new Variant
                     {

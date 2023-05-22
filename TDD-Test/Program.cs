@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using TDD_Test;
 
 var userInput = new List<string>
 {
@@ -8,3 +7,6 @@ var userInput = new List<string>
     "G3;V2;P1;100",
     "G4;V2;P1;100"
 };
+
+var work = new Services();
+work.AssembleVariants(userInput);

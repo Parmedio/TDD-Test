@@ -16,7 +16,7 @@ namespace UnitTest
         [Fact]
         public void AssembleGtin()
         {
-            var input = "G1;V1;P1;100";
+            var input = new string[] {"G1", "V1", "P1", "100"};
             var expectedName = "G1";
             var expectedPrice = 100;
 
