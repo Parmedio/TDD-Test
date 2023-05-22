@@ -9,7 +9,7 @@ namespace TDD_Test
 {
     public class Services
     {
-        public Gtin AssembleGitin(string input)
+        public Gtin AssembleGtin(string input)
         {
             string[] splittedInpuString = input.Split(";");
 
@@ -20,24 +20,26 @@ namespace TDD_Test
             };
         }
 
-        public Variant AssembleVariant(string row)
+        public List<Variant> AssembleVariants(List<string> rows)
         {
-            var gtins = row.Select(input =>
-            {
-                var values = input.Split(";");
-                return new Gtin
+            var variants = rows
+                .Select(row => row.Split(";"))
+                .GroupBy(values => values[1])
+                .Select(group =>
                 {
-                    Name = values[0],
-                    Price = int.Parse(values[3])
-                };
-            }).ToList();
+                    var gtins = group
+                        .Select(values => AssembleGtin(string.Join(";", values))).ToList();
 
-            return new Variant()
-            {
-                Name = input.Split(";")[0],
-                Price = int.Parse(input.Split(";")[3])
-                Gtins = input()
-            };
+                    return new Variant
+                    {
+                        Name = group.Key,
+                        Price = 0,
+                        Gtins = gtins
+                    };
+                })
+                .ToList();
+
+            return variants;
         }
     }
 }
