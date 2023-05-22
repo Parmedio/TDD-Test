@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using TDD_Test.models;
 
 namespace TDD_Test
@@ -31,7 +32,7 @@ namespace TDD_Test
                     return new Variant
                     {
                         Name = group.Key,
-                        Price = 0,
+                        Price = FindLowestPrice(gtins.Cast<ILowerPrice>().ToList()),
                         Gtins = gtins
                     };
                 })
@@ -48,17 +49,29 @@ namespace TDD_Test
                 .Distinct()
                 .FirstOrDefault();
 
+            var variants = AssembleVariants(rows);
+
             return new Product()
             {
                 Name = productName,
-                Price = 0,
-                Variants = AssembleVariants(rows),
+                Price = FindLowestPrice(variants.Cast<ILowerPrice>().ToList()),
+                Variants = variants,
             };
         }
 
-        public int FindLowerPrice(List<ILowerPrice> prices)
+        public int FindLowestPrice(List<ILowerPrice> items)
         {
-            return 4;
+            int lowestPrice = int.MaxValue;
+
+            foreach (var item in items)
+            {
+                if (item.Price < lowestPrice)
+                {
+                    lowestPrice = item.Price;
+                }
+            }
+
+            return lowestPrice;
         }
 
     }
