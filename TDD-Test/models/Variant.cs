@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TDD_Test.models
 {
-    public class Variant
+    public class Variant : ILowerPrice
     {
         public string Name { get; set; }
         public int Price { get; set; }

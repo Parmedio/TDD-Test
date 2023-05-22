@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace TDD_Test.models
 {
-    internal interface IPriceScout
+    public interface ILowerPrice
     {
+        int Price { get; set; }
     }
 }

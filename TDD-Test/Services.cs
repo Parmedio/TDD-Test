@@ -39,5 +39,27 @@ namespace TDD_Test
 
             return variants;
         }
+
+        public Product AssembleProduct(List<string> rows)
+        {
+            var productName = rows
+                .Select(row => row.Split(";"))
+                .Select(values => values[2])
+                .Distinct()
+                .FirstOrDefault();
+
+            return new Product()
+            {
+                Name = productName,
+                Price = 0,
+                Variants = AssembleVariants(rows),
+            };
+        }
+
+        public int FindLowerPrice(List<ILowerPrice> prices)
+        {
+            return 4;
+        }
+
     }
 }
