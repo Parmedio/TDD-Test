@@ -36,9 +36,10 @@ namespace TDD_Test
                         Price = FindLowestPrice(gtins), 
                         Gtins = gtins
                     };
-                });
+                })
+                .OfType<Variant>().ToArray();
 
-            return variants.OfType<Variant>().ToArray();
+            return variants;
         }
 
         public Product AssembleProduct(List<string> rows)
