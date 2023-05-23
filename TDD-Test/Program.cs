@@ -10,3 +10,14 @@ var userInput = new List<string>
 
 var work = new Services();
 work.AssembleVariants(userInput);
+
+
+//PROVARE a fare passando una lista di liste oggetti
+
+//var userInput = new List<string>
+//{
+//    G(1); V(1); P(1); 100,
+//    G(2); V(1); P(1); 100,
+//    G(3); V(2); P(1); 100,
+//    G(4); V(2); P(1); 100
+//};
