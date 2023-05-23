@@ -10,6 +10,6 @@ namespace TDD_Test.models
     {
         public string Name { get; set; }
         public int Price { get; set; }
-        public List<Gtin> Gtins { get; set; }
+        public Gtin[] Gtins { get; set; }
     }
 }

@@ -37,9 +37,9 @@ namespace UnitTest
                 "G4;V2;P1;80"
             };
 
-            var expectedFirstGtins = _sut.AssembleVariants(userInput)[0].Gtins.Cast<ILowerPrice>().ToList();
-            var expectedSecondGtins = _sut.AssembleVariants(userInput)[1].Gtins.Cast<ILowerPrice>().ToList();
-            var expectedVariants = _sut.AssembleVariants(userInput).Cast<ILowerPrice>().ToList();
+            var expectedFirstGtins = _sut.AssembleVariants(userInput)[0].Gtins;
+            var expectedSecondGtins = _sut.AssembleVariants(userInput)[1].Gtins;
+            var expectedVariants = _sut.AssembleVariants(userInput);
 
             var result01 = _sut.FindLowestPrice(expectedFirstGtins);
             var result02 = _sut.FindLowestPrice(expectedSecondGtins);
@@ -69,8 +69,8 @@ namespace UnitTest
             Assert.Equal(50, result[0].Price);
             Assert.Equal(70, result[1].Price);
 
-            Assert.Equal(2, result[0].Gtins.Count);
-            Assert.Equal(2, result[1].Gtins.Count);
+            Assert.Equal(2, result[0].Gtins.Length);
+            Assert.Equal(2, result[1].Gtins.Length);
 
             Assert.Equal("G1", result[0].Gtins[0].Name);
             Assert.Equal("G2", result[0].Gtins[1].Name);

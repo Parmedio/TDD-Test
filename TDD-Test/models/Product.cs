@@ -10,6 +10,6 @@ namespace TDD_Test.models
     {
         public string Name { get; set; }
         public int Price { get; set; }
-        public List<Variant> Variants { get; set; }
+        public Variant[] Variants { get; set; }
     }
 }

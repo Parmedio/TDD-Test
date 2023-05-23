@@ -19,7 +19,7 @@ namespace TDD_Test
             };
         }
 
-        public List<Variant> AssembleVariants(List<string> rows)
+        public Variant[] AssembleVariants(List<string> rows)
         {
             var variants = rows
                 .Select(row => row.Split(";"))
@@ -27,18 +27,18 @@ namespace TDD_Test
                 .Select(group =>
                 {
                     var gtins = group
-                        .Select(values => AssembleGtin(values)).ToList();
+                        .Select(values => AssembleGtin(values))
+                        .OfType<Gtin>().ToArray();
 
                     return new Variant
                     {
                         Name = group.Key,
-                        Price = FindLowestPrice(gtins.Cast<ILowerPrice>().ToList()),
+                        Price = FindLowestPrice(gtins), 
                         Gtins = gtins
                     };
-                })
-                .ToList();
+                });
 
-            return variants;
+            return variants.OfType<Variant>().ToArray();
         }
 
         public Product AssembleProduct(List<string> rows)
@@ -54,12 +54,12 @@ namespace TDD_Test
             return new Product()
             {
                 Name = productName,
-                Price = FindLowestPrice(variants.Cast<ILowerPrice>().ToList()),
-                Variants = variants,
+                Price = FindLowestPrice(variants),
+                Variants = variants
             };
         }
 
-        public int FindLowestPrice(List<ILowerPrice> items)
+        public int FindLowestPrice(ILowerPrice[] items)
         {
             int lowestPrice = int.MaxValue;
 
